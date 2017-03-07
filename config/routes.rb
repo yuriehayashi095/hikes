@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :hikes
+  resources :relationships, only: [:create, :destroy]
+  
 end
