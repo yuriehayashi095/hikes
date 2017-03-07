@@ -1,0 +1,12 @@
+<li id="hike-<%= hike.id %>">
+  <%= link_to gravatar_for(hike.user, size: 50), hike.user %>
+  <span class="user"><%= link_to hike.user.name, hike.user %></span>
+  <span class="content"><%= hike.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(hike.created_at) %> ago.
+    <% if current_user == hike.user %>
+      <%= link_to "delete", hike, method: :delete,
+                                       data: { confirm: "よろしいですか？" } %>
+    <% end %>
+  </span>
+</li>
