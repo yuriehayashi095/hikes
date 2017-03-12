@@ -4,7 +4,8 @@
     <%= hidden_field_tag :hike_id, hike.id %>
 </div>
 <%#= f.submit %Q!<span class="glyphicon glyphicon-heart"></span>!, class: "btn btn-default" %>
-    <%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
+<div id="favorite"><%= button_tag :type => "submit", :class =>"btn btn-default btn-s-md" do %>
       <span class="glyphicon glyphicon-heart heart-white"></span>
     <% end %>
+</div>
 <% end %>
