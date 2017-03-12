@@ -13,7 +13,7 @@
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.hikes.any? %>
-      <h3>Hikes (<%= @user.hikes.count %>)</h3>
+      <h3><%= @user.hikes.count %>件のHikes</h3>
       <ol class="hikes">
         <%= render @hikes %>
       </ol>
