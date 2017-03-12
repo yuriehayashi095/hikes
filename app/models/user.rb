@@ -8,11 +8,16 @@ class User < ActiveRecord::Base
     has_secure_password
     
     has_many :hikes
-    
-    has_many :following_relationships, class_name:  "Relationship",
-                                     foreign_key: "follower_id",
-                                     dependent:   :destroy
+    has_many :favorites, foreign_key: "user_id", dependent: :destroy
+    has_many :favorite_posts, through: :favorites, source: :favorite
+    has_many :following_relationships, class_name: "Relationship",
+                                        foreign_key: "follower_id",
+                                        dependent: :destroy
     has_many :following_users, through: :following_relationships, source: :followed
+    has_many :follower_relationships, class_name: "Relationship",
+                                        foreign_key: "followed_id",
+                                        dependent: :destroy
+    has_many :follower_users, through: :follower_relationships, source: :follower
 
 
     # 他のユーザーをフォローする
@@ -30,5 +35,27 @@ class User < ActiveRecord::Base
     def following?(other_user)
     following_users.include?(other_user)
     end
-
+    
+  # favorite
+    def favorite(hike)
+        favorites.find_or_create_by(favorite_id: hike.id)
+    end
+    
+    def unfavorite(hike)
+        fav =favorites.find_by(favorite_id: hike.id)
+        fav.destroy if fav != nil
+    end
+    
+    def favorite?(hike)
+        favorite_posts.include?(hike)
+    end
+    
+    def favorite_items
+    Hike.where(hike_id: favorite_ids)
+    end
+    
+    def feed_items
+    Hike.where(user_id: following_user_ids + [self.id])
+    end
+    
 end

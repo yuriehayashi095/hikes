@@ -1,7 +1,9 @@
 <%= form_for(@hike) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "ここで一句" %>
+    <%= f.text_area :content, placeholder: "上の句" %>
+    <%= f.text_area :content2, placeholder: "中の句"%>
+    <%= f.text_area :content3, placeholder: "下の句"%>
   </div>
-  <%= f.submit "詠む", class: "btn btn-primary" %>
+  <%= f.submit "Hike!", class: "btn btn-warning" %>
 <% end %>

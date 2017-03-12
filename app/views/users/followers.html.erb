@@ -1,0 +1,11 @@
+<h1>フォローされているユーザー</h1>
+<br>
+
+<% @fs_user.each do |user| %>
+   <ul style="list-style:none;">
+   <li>
+   <%= gravatar_for(user) %>
+   <%= link_to user.name, user %>
+   </li>
+   </ul>
+<% end %>

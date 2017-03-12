@@ -1,12 +1,22 @@
 <li id="hike-<%= hike.id %>">
   <%= link_to gravatar_for(hike.user, size: 50), hike.user %>
   <span class="user"><%= link_to hike.user.name, hike.user %></span>
-  <span class="content"><%= hike.content %></span>
+  <% if current_user == hike.user %>
+      <%= link_to sanitize('<span class="glyphicon glyphicon-trash"></span>'), hike, method: :delete,
+                                       data: { confirm: "削除してもよろしいですか？" } %>
+  <% end %>
+  <span class="content"><%= hike.content %> <%= hike.content2 %> <%= hike.content3 %></span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(hike.created_at) %> ago.
-    <% if current_user == hike.user %>
-      <%= link_to "delete", hike, method: :delete,
-                                       data: { confirm: "よろしいですか？" } %>
-    <% end %>
+    <%= hike.created_at.strftime("%Y年%m月%d日 %H:%M") %>
   </span>
+    <% if logged_in? %>
+    <div id="favorite-<%= hike.id %>">
+    <% if current_user.favorite?(hike) %>
+        <%= render 'hikes/unfavorite' , hike: hike %>
+         <%# お気に入り済み %>
+    <% else %>
+         <%= render 'hikes/favorite' , hike: hike %>
+    <% end %>
+    <% end %>
+  
 </li>
