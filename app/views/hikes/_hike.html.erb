@@ -5,7 +5,7 @@
       <%= link_to sanitize('<span class="glyphicon glyphicon-trash"></span>'), hike, method: :delete,
                                        data: { confirm: "削除してもよろしいですか？" } %>
   <% end %>
-  <span class="content"><%= hike.content %> <%= hike.content2 %> <%= hike.content3 %></span>
+  <span class="content"><%= hike.content %></br><%= hike.content2 %></br> <%= hike.content3 %></span>
   <span class="timestamp">
     <%= hike.created_at.strftime("%Y年%m月%d日 %H:%M") %>
   </span>
